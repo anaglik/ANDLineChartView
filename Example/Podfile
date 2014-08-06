@@ -1,0 +1,9 @@
+target 'ANDLineChartView', :exclusive => true do
+  pod "ANDLineChartView", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "ANDLineChartView", :path => "../"
+
+  pod 'Kiwi'
+end

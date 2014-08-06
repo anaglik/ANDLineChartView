@@ -1,4 +1,57 @@
-ANDLineChartView
-================
+# ANDLineChartView
 
 ANDLineChartView is easy to use view-based class for displaying animated line chart.
+
+![](https://raw.github.com/anaglik/ANDLineChartView/master/example.gif)
+
+[![CI Status](http://img.shields.io/travis/Andrzej Naglik/ANDLineChartView.svg?style=flat)](https://travis-ci.org/Andrzej Naglik/ANDLineChartView)
+[![Version](https://img.shields.io/cocoapods/v/ANDLineChartView.svg?style=flat)](http://cocoadocs.org/docsets/ANDLineChartView)
+[![License](https://img.shields.io/cocoapods/l/ANDLineChartView.svg?style=flat)](http://cocoadocs.org/docsets/ANDLineChartView)
+[![Platform](https://img.shields.io/cocoapods/p/ANDLineChartView.svg?style=flat)](http://cocoadocs.org/docsets/ANDLineChartView)
+
+## Usage
+
+API is simple. Just implement following data source methods:
+
+``` objective-c
+- (NSUInteger)numberOfElementsInChartView:(ANDLineChartView *)chartView;
+- (CGFloat)chartView:(ANDLineChartView *)chartView valueForElementAtRow:(NSUInteger)row;
+
+- (NSUInteger)numberOfGridIntervalsInChartView:(ANDLineChartView *)chartView;
+- (NSString*)chartView:(ANDLineChartView *)chartView descriptionForGridIntervalValue:(CGFloat)interval;
+
+- (CGFloat)maxValueForGridIntervalInChartView:(ANDLineChartView *)chartView;
+- (CGFloat)minValueForGridIntervalInChartView:(ANDLineChartView *)chartView;
+```
+
+You can also specify spacing between elements in chart by implementing optional delegate method :
+``` objective-c
+- (CGFloat)chartView:(ANDLineChartView *)chartView spacingForElementAtRow:(NSUInteger)row
+```
+Font and colors are customizable through class properties.
+
+ANDLineChartView works well with autolayout, to see it in action with UIScrollView see example project.
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+## Screenshot
+
+![Alt text](https://raw.github.com/anaglik/ANDLineChartView/master/screen1.png)
+
+## Requirements
+
+iOS7 or later
+
+## Installation
+
+ANDLineChartView is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+pod "ANDLineChartView"
+
+## Author
+
+Andrzej Naglik, dev.an@icloud.com
+
+## License
+
+ANDLineChartView is available under the MIT license. See the LICENSE file for more info.

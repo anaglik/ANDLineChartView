@@ -1,0 +1,17 @@
+PODS:
+  - ANDLineChartView (0.1.0)
+  - Kiwi (2.3.0)
+
+DEPENDENCIES:
+  - ANDLineChartView (from `../`)
+  - Kiwi
+
+EXTERNAL SOURCES:
+  ANDLineChartView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ANDLineChartView: e65655eb1bc4154590846bf49ae80ce742ede4e3
+  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
+
+COCOAPODS: 0.33.1
