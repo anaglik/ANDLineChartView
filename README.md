@@ -4,11 +4,6 @@ ANDLineChartView is easy to use view-based class for displaying animated line ch
 
 ![](https://raw.github.com/anaglik/ANDLineChartView/master/example.gif)
 
-[![CI Status](http://img.shields.io/travis/Andrzej Naglik/ANDLineChartView.svg?style=flat)](https://travis-ci.org/Andrzej Naglik/ANDLineChartView)
-[![Version](https://img.shields.io/cocoapods/v/ANDLineChartView.svg?style=flat)](http://cocoadocs.org/docsets/ANDLineChartView)
-[![License](https://img.shields.io/cocoapods/l/ANDLineChartView.svg?style=flat)](http://cocoadocs.org/docsets/ANDLineChartView)
-[![Platform](https://img.shields.io/cocoapods/p/ANDLineChartView.svg?style=flat)](http://cocoadocs.org/docsets/ANDLineChartView)
-
 ## Usage
 
 API is simple. Just implement following data source methods:

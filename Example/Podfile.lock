@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ANDLineChartView: e65655eb1bc4154590846bf49ae80ce742ede4e3
+  ANDLineChartView: 41b396f72dfcfc2e110fdf03a05faaedbb606cc0
   Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
 
 COCOAPODS: 0.33.1

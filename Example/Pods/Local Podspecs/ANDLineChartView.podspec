@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "Andrzej Naglik" => "dev.an@icloud.com" }
   s.source           = { :git => "https://github.com/anaglik/ANDLineChartView.git", :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/andy_namic>'
+  s.social_media_url = 'https://twitter.com/andy_namic'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
