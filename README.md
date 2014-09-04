@@ -1,4 +1,4 @@
-# ANDLineChartView
+# ANDLineChartView for iOS
 
 ANDLineChartView is easy to use view-based class for displaying animated line chart.
 
