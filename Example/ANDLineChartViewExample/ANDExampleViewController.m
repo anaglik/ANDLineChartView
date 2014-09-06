@@ -11,7 +11,7 @@
 
 #define NUMBERS_COUNT 20
 
-#define MAX_NUMBER 22
+#define MAX_NUMBER 20
 
 @interface ANDExampleViewController()<ANDLineChartViewDataSource,ANDLineChartViewDelegate>{
   NSArray *_elements;
@@ -70,7 +70,7 @@
 - (NSArray*)arrayWithNumberOfRandomNumbers:(NSUInteger)count{
   NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
   for(NSUInteger i = 0;i<count;i++){
-    NSUInteger r = arc4random_uniform(MAX_NUMBER - 1) + (0);
+    NSUInteger r = arc4random_uniform(MAX_NUMBER + 1);
     [array addObject:@(r)];
   }
   return array;
@@ -98,8 +98,8 @@
   return NO;
 }
 
-#pragma mark -
 #pragma mark
+#pragma mark - ANDLineChartViewDataSource methods
 
 - (NSUInteger)numberOfElementsInChartView:(ANDLineChartView *)graphView{
   return NUMBERS_COUNT;
@@ -125,8 +125,8 @@
   return [NSString stringWithFormat:@"%.1f",interval];
 }
 
-#pragma mark - 
-#pragma mark 
+#pragma mark
+#pragma mark - ANDLineChartViewDelegate method
 
 - (CGFloat)chartView:(ANDLineChartView *)graphView spacingForElementAtRow:(NSUInteger)row{
   return (row == 0) ? 60.0 : 30.0;

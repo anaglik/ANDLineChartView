@@ -25,7 +25,9 @@
 @property (nonatomic, strong) UIColor *elementStrokeColor;
 @property (nonatomic, strong) UIColor *lineColor;
 
-@property (nonatomic, assign) CGFloat elementSpacing;//default is 30
+@property (nonatomic, assign) CGFloat elementSpacing; //default is 30
+
+@property (nonatomic, assign) NSTimeInterval animationDuration; //default is 0.36
 
 // Support for constraint-based layout (auto layout)
 // If nonzero, this is used when determining -intrinsicContentSize

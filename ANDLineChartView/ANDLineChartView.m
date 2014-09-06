@@ -46,6 +46,7 @@
     [self setElementSpacing:DEFAULT_ELEMENT_SPACING];
     
     [self setContentMode:UIViewContentModeRedraw];
+    [self setAnimationDuration:TRANSITION_DURATION];
     
     [self setupGradientLayer];
     [self setupMaskLayer];
@@ -104,17 +105,17 @@
   
   CGContextSaveGState(context);
   
-  NSUInteger numberOfIntervalLines = [[self dataSource] numberOfGridIntervalsInChartView:self];
+  NSUInteger numberOfIntervalLines =  [self numberOfIntervalLines];
   CGFloat intervalSpacing = floor(maxHeight/(numberOfIntervalLines-1));
   
-  CGFloat maxIntervalValue = [[self dataSource] maxValueForGridIntervalInChartView:self];
-  CGFloat minIntervalValue = [[self dataSource] minValueForGridIntervalInChartView:self];
+  CGFloat maxIntervalValue = [self maxValue];
+  CGFloat minIntervalValue = [self minValue];
   CGFloat maxIntervalDiff = (maxIntervalValue - minIntervalValue)/(numberOfIntervalLines-1);
   
   for(NSUInteger i = 0;i<numberOfIntervalLines;i++){
     [_gridIntervalLinesColor setStroke];
     [gridLinePath stroke];
-    NSString *stringToDraw = [[self dataSource] chartView:self descriptionForGridIntervalValue:minIntervalValue + i*maxIntervalDiff];
+    NSString *stringToDraw = [self descriptionForValue:minIntervalValue + i*maxIntervalDiff];
     UIColor *stringColor = [self gridIntervalFontColor];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -134,7 +135,7 @@
 }
 
 - (void)reloadData{
-  NSUInteger numberOfPoints = [[self dataSource] numberOfElementsInChartView:self];
+  NSUInteger numberOfPoints = [self numberOfElements];
   if(numberOfPoints != _numberOfPreviousElements)
     [self invalidateIntrinsicContentSize];
   [self setNeedsDisplay];
@@ -152,12 +153,12 @@
 }
 
 - (void)refreshGraphLayer{
-  if([[self dataSource] numberOfElementsInChartView:self] == 0)
+  if([self numberOfElements] == 0)
     return;
   
   UIBezierPath *path = [UIBezierPath bezierPath];
   [path moveToPoint:CGPointMake(0.0, 0.0)];
-  NSUInteger numberOfPoints = [[self dataSource] numberOfElementsInChartView:self];
+  NSUInteger numberOfPoints = [self numberOfElements];
   _numberOfPreviousElements = numberOfPoints;
   CGFloat xPosition = 0.0;
   CGFloat yMargin = 0.0;
@@ -170,8 +171,8 @@
   CGPoint lastPoint;
   [CATransaction begin];
   for(NSUInteger i = 0; i<numberOfPoints;i++){
-    CGFloat value = [[self dataSource] chartView:self valueForElementAtRow:i];
-    CGFloat minGridValue = [[self dataSource] minValueForGridIntervalInChartView:self];
+    CGFloat value = [self valueForElementAtRow:i];
+    CGFloat minGridValue = [self minValue];
     
     xPosition += [self spacingForElementAtRow:i] ;
     yPosition = yMargin + floor((value-minGridValue)*[self pixelToRecordPoint]);
@@ -188,7 +189,7 @@
     //animate position change
     if(animationNeeded){
       CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-      positionAnimation.duration = TRANSITION_DURATION;
+      positionAnimation.duration = [self animationDuration];
       positionAnimation.fromValue = [NSValue valueWithCGPoint:oldPosition];
       positionAnimation.toValue = [NSValue valueWithCGPoint:newPosition];
       //[positionAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
@@ -209,7 +210,7 @@
       // animate position change
       if(animationNeeded){
         CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-        positionAnimation.duration = TRANSITION_DURATION;
+        positionAnimation.duration = [self animationDuration];
         positionAnimation.fromValue = [NSValue valueWithCGPoint:oldPosition];
         positionAnimation.toValue = [NSValue valueWithCGPoint:newPosition];
         [positionAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
@@ -224,7 +225,7 @@
   [_graphLayer setPath:path.CGPath];
   if(animationNeeded){
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
-    pathAnimation.duration = TRANSITION_DURATION;
+    pathAnimation.duration = [self animationDuration];
     pathAnimation.fromValue = (__bridge id)oldPath;
     pathAnimation.toValue = (__bridge id)newPath;
     //[pathAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
@@ -242,7 +243,7 @@
 
   if(animationNeeded){
     CABasicAnimation *pathAnimation2 = [CABasicAnimation animationWithKeyPath:@"path"];
-    pathAnimation2.duration = TRANSITION_DURATION;
+    pathAnimation2.duration = [self animationDuration];
     pathAnimation2.fromValue = (__bridge id)maskOldPath;
     pathAnimation2.toValue = (__bridge id)maskNewPath;
     //[pathAnimation2 setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
@@ -273,6 +274,70 @@
   return spacing;
 }
 
+- (NSUInteger)numberOfElements{
+  if(_dataSource && [_dataSource respondsToSelector:@selector(numberOfElementsInChartView:)]){
+    return [_dataSource numberOfElementsInChartView:self];
+  }else{
+    NSAssert(_dataSource, @"Data source is not set.");
+    NSAssert([_dataSource respondsToSelector:@selector(numberOfElementsInChartView:)], @"numberOfElementsInChartView: not implemented.");
+    return 0;
+  }
+}
+
+- (NSUInteger)numberOfIntervalLines{
+  if(_dataSource && [_dataSource respondsToSelector:@selector(numberOfGridIntervalsInChartView:)]){
+    return [_dataSource numberOfGridIntervalsInChartView:self];
+  }else{
+    NSAssert(_dataSource, @"Data source is not set.");
+    NSAssert([_dataSource respondsToSelector:@selector(numberOfGridIntervalsInChartView:)], @"numberOfGridIntervalsInChartView: not implemented.");
+    return 0;
+  }
+}
+
+- (CGFloat)valueForElementAtRow:(NSUInteger)row{
+  if(_dataSource && [_dataSource respondsToSelector:@selector(chartView:valueForElementAtRow:)]){
+    CGFloat value = [_dataSource chartView:self valueForElementAtRow:row];
+    NSAssert(value >= [self minValue] && value <= [self maxValue], @"Value for element %i (%f) is not in min/max range",row,value);
+    return value;
+  }else{
+    NSAssert(_dataSource, @"Data source is not set.");
+    NSAssert([_dataSource respondsToSelector:@selector(chartView:valueForElementAtRow:)], @"chartView:valueForElementAtRow: not implemented.");
+    return 0.0;
+  }
+}
+
+- (CGFloat)minValue{
+  if(_dataSource && [_dataSource respondsToSelector:@selector(minValueForGridIntervalInChartView:)]){
+    CGFloat minValue = [_dataSource minValueForGridIntervalInChartView:self];
+    NSAssert(minValue < [self maxValue], @"minimal value cannot be bigger than max value");
+    return minValue;
+  }else{
+    NSAssert(_dataSource, @"Data source is not set.");
+    NSAssert([_dataSource respondsToSelector:@selector(minValueForGridIntervalInChartView:)], @"minValueForGridIntervalInChartView: not implemented.");
+    return 0.0;
+  }
+}
+
+- (CGFloat)maxValue{
+  if(_dataSource && [_dataSource respondsToSelector:@selector(maxValueForGridIntervalInChartView:)]){
+    return [_dataSource maxValueForGridIntervalInChartView:self];
+  }else{
+    NSAssert(_dataSource, @"Data source is not set.");
+    NSAssert([_dataSource respondsToSelector:@selector(maxValueForGridIntervalInChartView:)], @"maxValueForGridIntervalInChartView: not implemented.");
+    return 0.0;
+  }
+}
+
+- (NSString*)descriptionForValue:(CGFloat)value{
+  if(_dataSource && [_dataSource respondsToSelector:@selector(chartView:descriptionForGridIntervalValue:)]){
+    return [_dataSource chartView:self descriptionForGridIntervalValue:value];
+  }else{
+    NSAssert(_dataSource, @"Data source is not set.");
+    NSAssert([_dataSource respondsToSelector:@selector(chartView:descriptionForGridIntervalValue:)], @"chartView:descriptionForGridIntervalValue: not implemented.");
+    return @"";
+  }
+}
+
 - (CGFloat)viewHeight{
   UIFont *font = [self gridIntervalFont];
   CGFloat maxHeight = round(CGRectGetHeight([self frame]) - [font lineHeight]);
@@ -282,8 +347,8 @@
 - (CGFloat)pixelToRecordPoint{
   CGFloat maxHeight = [self viewHeight];
   
-  CGFloat maxIntervalValue = [[self dataSource] maxValueForGridIntervalInChartView:self];
-  CGFloat minIntervalValue = [[self dataSource] minValueForGridIntervalInChartView:self];
+  CGFloat maxIntervalValue = [self maxValue];
+  CGFloat minIntervalValue = [self minValue];
   
   return round(maxHeight/(maxIntervalValue - minIntervalValue));
 }
@@ -340,7 +405,7 @@
 
 - (CGSize)intrinsicContentSize{
   CGFloat width = 0.0;
-  NSUInteger totalElements = [[self dataSource] numberOfElementsInChartView:self];
+  NSUInteger totalElements = [self numberOfElements];
   for(int i = 0;i < totalElements;i++){
     width += [self spacingForElementAtRow:i];
   }
