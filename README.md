@@ -25,8 +25,7 @@ You can also specify spacing between elements in chart by implementing optional 
 ```
 Font and colors are customizable through class properties.
 
-ANDLineChartView works well with autolayout, to see it in action with UIScrollView see example project.
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, just clone repo and open ANDLineChartView.xcworkspace .
 
 ## Screenshot
 

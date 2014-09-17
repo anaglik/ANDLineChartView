@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Andrzej Naglik on 08.09.2014.
-//
+//  Copyright (c) 2014 Andrzej Naglik. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
