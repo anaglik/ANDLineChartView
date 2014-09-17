@@ -105,7 +105,6 @@
   CGFloat xPosition = 0.0;
   CGFloat yMargin = 0.0;
   CGFloat yPosition = 0.0;
-  CGFloat maxHeight = 0.0;
 
   [_graphLayer setStrokeColor:[[self.chartContainer lineColor] CGColor]];
 
@@ -118,7 +117,6 @@
     xPosition += [self.chartContainer spacingForElementAtRow:i] ;
     yPosition = yMargin + floor((value-minGridValue)*[self pixelToRecordPoint]);
     
-    if(yPosition > maxHeight) maxHeight = yPosition;
     CGPoint newPosition = CGPointMake(xPosition, yPosition);
     [path addLineToPoint:newPosition];
     
@@ -213,7 +211,7 @@
   CGFloat maxIntervalValue = [self.chartContainer maxValue];
   CGFloat minIntervalValue = [self.chartContainer minValue];
   
-  return round(maxHeight/(maxIntervalValue - minIntervalValue));
+  return (maxHeight/(maxIntervalValue - minIntervalValue));
 }
 
 - (CALayer*)circleLayerForPointAtRow:(NSUInteger)row{

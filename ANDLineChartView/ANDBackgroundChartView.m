@@ -51,8 +51,8 @@
   CGContextSaveGState(context);
   
   NSUInteger numberOfIntervalLines =  [self.chartContainer numberOfIntervalLines];
-  CGFloat intervalSpacing = floor(maxHeight/(numberOfIntervalLines-1));
-  
+  CGFloat intervalSpacing = (maxHeight/(numberOfIntervalLines-1));
+
   CGFloat maxIntervalValue = [self.chartContainer maxValue];
   CGFloat minIntervalValue = [self.chartContainer minValue];
   CGFloat maxIntervalDiff = (maxIntervalValue - minIntervalValue)/(numberOfIntervalLines-1);
