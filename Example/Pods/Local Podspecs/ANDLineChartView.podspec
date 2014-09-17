@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ANDLineChartView"
-  s.version          = "0.1.0"
+  s.version          = "0.2"
   s.summary          = "ANDLineChartView is easy to use view-based class for displaying animated line chart."
   s.description      = <<-DESC
                        ANDLineChartView is easy to use view-based class for displaying animated line chart.

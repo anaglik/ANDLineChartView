@@ -4,6 +4,4 @@ end
 
 target 'Tests', :exclusive => true do
   pod "ANDLineChartView", :path => "../"
-
-  pod 'Kiwi'
 end
