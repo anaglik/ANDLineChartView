@@ -109,7 +109,7 @@
 
   [_graphLayer setStrokeColor:[[self.chartContainer lineColor] CGColor]];
 
-  CGPoint lastPoint;
+  CGPoint lastPoint = CGPointMake(0, 0);
   [CATransaction begin];
   for(NSUInteger i = 0; i<numberOfPoints;i++){
     CGFloat value = [self.chartContainer valueForElementAtRow:i];

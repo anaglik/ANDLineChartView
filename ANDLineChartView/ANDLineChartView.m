@@ -174,7 +174,7 @@
 - (CGFloat)valueForElementAtRow:(NSUInteger)row{
   if(_dataSource && [_dataSource respondsToSelector:@selector(chartView:valueForElementAtRow:)]){
     CGFloat value = [_dataSource chartView:self valueForElementAtRow:row];
-    NSAssert(value >= [self minValue] && value <= [self maxValue], @"Value for element %i (%f) is not in min/max range",row,value);
+    NSAssert(value >= [self minValue] && value <= [self maxValue], @"Value for element %lu (%f) is not in min/max range",(unsigned long)row,value);
     return value;
   }else{
     NSAssert(_dataSource, @"Data source is not set.");
