@@ -72,7 +72,7 @@
   _maxValue = MAX_NUMBER;//arc4random_uniform(MAX_NUMBER + 1);
   NSMutableArray *array = [NSMutableArray arrayWithCapacity:_numbersCount];
   for(NSUInteger i = 0;i<_numbersCount;i++){
-    NSUInteger r = arc4random_uniform(_maxValue + 1);
+    NSUInteger r = arc4random_uniform((u_int32_t)_maxValue + 1);
     [array addObject:@(r)];
   }
   return array;
