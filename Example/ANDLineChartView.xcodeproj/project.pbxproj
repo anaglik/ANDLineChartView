@@ -17,6 +17,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		A0C525B2F3154D70B3472696 /* libPods-ANDLineChartView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDC92BFB149418D92063BF0 /* libPods-ANDLineChartView.a */; };
+		A11EF3791AD671EE00CE82C0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11EF3781AD671EE00CE82C0 /* Launch Screen.xib */; };
 		A12B3DC81992BFA500FF97DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A12B3DC61992BFA500FF97DA /* main.m */; };
 		A12B3DCF1992BFBF00FF97DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A12B3DCD1992BFBF00FF97DA /* InfoPlist.strings */; };
 		A12B3DD51992BFD400FF97DA /* ANDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A12B3DD11992BFD400FF97DA /* ANDAppDelegate.m */; };
@@ -48,6 +49,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		A11EF3781AD671EE00CE82C0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "ANDLineChartViewExample/Launch Screen.xib"; sourceTree = SOURCE_ROOT; };
 		A12B3DC41992BFA500FF97DA /* ANDLineChartView-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ANDLineChartView-Info.plist"; path = "ANDLineChartViewExample/ANDLineChartView-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A12B3DC51992BFA500FF97DA /* ANDLineChartView-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ANDLineChartView-Prefix.pch"; path = "ANDLineChartViewExample/ANDLineChartView-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		A12B3DC61992BFA500FF97DA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ANDLineChartViewExample/main.m; sourceTree = SOURCE_ROOT; };
@@ -132,6 +134,7 @@
 				A12B3DD21992BFD400FF97DA /* ANDExampleViewController.h */,
 				A12B3DD31992BFD400FF97DA /* ANDExampleViewController.m */,
 				A12B3DD41992BFD400FF97DA /* Images.xcassets */,
+				A11EF3781AD671EE00CE82C0 /* Launch Screen.xib */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			name = ANDLineChartViewExample;
@@ -261,6 +264,7 @@
 			files = (
 				A12B3DD71992BFD400FF97DA /* Images.xcassets in Resources */,
 				A12B3DCF1992BFBF00FF97DA /* InfoPlist.strings in Resources */,
+				A11EF3791AD671EE00CE82C0 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +467,6 @@
 			baseConfigurationReference = A12DD98C37F24675B74F1339 /* Pods-ANDLineChartView.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ANDLineChartViewExample/ANDLineChartView-Prefix.pch";
 				INFOPLIST_FILE = "ANDLineChartViewExample/ANDLineChartView-Info.plist";
@@ -477,7 +480,6 @@
 			baseConfigurationReference = A12DD98C37F24675B74F1339 /* Pods-ANDLineChartView.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ANDLineChartViewExample/ANDLineChartView-Prefix.pch";
 				INFOPLIST_FILE = "ANDLineChartViewExample/ANDLineChartView-Info.plist";

@@ -60,9 +60,10 @@
 
 - (void)randomizeElements{
   __weak ANDExampleViewController *weakSelf = self;
+  __weak ANDLineChartView *weakChartView = _chartView;
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    _elements = [self arrayWithRandomNumbers];
-    [_chartView reloadData];
+    _elements = [weakSelf arrayWithRandomNumbers];
+    [weakChartView reloadData];
     [weakSelf randomizeElements];
   });
 }
@@ -95,7 +96,6 @@
 
 - (CGFloat)maxValueForGridIntervalInChartView:(ANDLineChartView *)graphView{
   return _maxValue;
-  return 20.0;
 }
 
 - (CGFloat)minValueForGridIntervalInChartView:(ANDLineChartView *)graphView{
